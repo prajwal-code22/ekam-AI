@@ -1,0 +1,55 @@
+{% load static %}<!doctype html>
+<html lang="ne">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>E-Kaam AI — Voice Job Matching for Nepal</title>
+  <meta name="description" content="Speak in Nepali or English to post a job. Gemini AI finds the trade and nearest worker instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+</head>
+<body>
+  <main>
+    <header class="brand">
+      <span class="brand-ne" lang="ne">ई-काम</span>
+      <span class="brand-en">E-Kaam AI</span>
+    </header>
+
+    <section class="hero" aria-labelledby="prompt">
+      <h1 id="prompt" lang="ne">के काम गराउनु छ?</h1>
+      <p class="hint">Tap the mic and say it in Nepali or English. We find the nearest worker.</p>
+
+      <button id="mic" class="mic" type="button" aria-pressed="false" aria-label="Start recording">
+        <svg viewBox="0 0 24 24" width="44" height="44" aria-hidden="true">
+          <path fill="currentColor" d="M12 15a4 4 0 0 0 4-4V6a4 4 0 0 0-8 0v5a4 4 0 0 0 4 4Zm6-4a1 1 0 1 1 2 0 8 8 0 0 1-7 7.94V21h3a1 1 0 1 1 0 2H8a1 1 0 1 1 0-2h3v-2.06A8 8 0 0 1 4 11a1 1 0 1 1 2 0 6 6 0 0 0 12 0Z"/>
+        </svg>
+      </button>
+      <p id="status" class="status" role="status" aria-live="polite">Ready</p>
+
+      <details class="typed">
+        <summary>Type instead</summary>
+        <form id="text-form">
+          <label for="text-input" class="sr-only">Describe the job</label>
+          <textarea id="text-input" rows="2" placeholder="भोलि बिहान मेरो घरमा ट्यांकी मर्मत गर्न मान्छे चाहियो"></textarea>
+          <button type="submit" class="send">Find a worker</button>
+        </form>
+      </details>
+    </section>
+
+    <section id="result" class="result" hidden aria-live="polite">
+      <h2>Your job</h2>
+      <dl id="job-fields"></dl>
+      <p id="follow-up" class="follow-up" hidden></p>
+
+      <h2>Nearest workers</h2>
+      <ul id="workers" class="workers"></ul>
+    </section>
+
+    <p id="error" class="error" role="alert" hidden></p>
+  </main>
+  <script src="{% static 'js/app.js' %}"></script>
+</body>
+</html>
